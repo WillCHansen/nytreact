@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/week19hw
 
 # testing
 /coverage
