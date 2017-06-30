@@ -1,12 +1,16 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose'); // do we need this here either?
-//var PORT = process.env.PORT || 5000;
-var PORT = 3000;
+var mongoose = require('mongoose');
 
-var db = require("./config/connection.js"); //honestly not sure if this is required here
+var PORT = (process.env.PORT || 3000);
+var db = require("./config/connection.js");
 
 var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+
 
 app.use(bodyParser.urlencoded({
 	extended: false
@@ -15,9 +19,13 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('public'));
 
 //controllers
-require("./controllers/scraper.js")(app);
-require("./controllers/postHandler.js")(app);
+require("./controllers/API_controller.js")(app);
+
+app.get("/", function(req,res){
+	res.sendFile(__dirname + "/public/index.html");
+});
+
 
 app.listen(PORT, function(){
-	console.log("We're running on port "+PORT+" mang");
+	console.log("We're running on port 3000 mang");
 });
