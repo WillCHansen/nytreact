@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var PORT = (process.env.PORT || 3000);
-var db = require("./config/connection.js");
+// var db = require("./config/connection.js");
 
 var app = express();
 app.use(bodyParser.json());
